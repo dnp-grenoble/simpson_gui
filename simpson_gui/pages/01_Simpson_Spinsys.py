@@ -305,10 +305,11 @@ def main():
     else:
         str_d = " "
 
-    if result_df_j is not None:
-        str_j = result_df_j.to_string(index=False, header=False)
-    else:
+    if result_df_j.empty():
         str_j = " "
+    else:
+        str_j = result_df_j.to_string(index=False, header=False)
+
 
     if result_df_q is not None:
         str_q = result_df_q.to_string(index=False, header=False)
