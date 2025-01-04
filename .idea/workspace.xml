@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="updated decorations on spinsys" />
+    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Update interaction selection logic in SIMPSON spinsys generation&#10;&#10;Clarified instructions for selecting interactions and added a validation to ensure that interactions are selected before generating the simulation file. Improved user feedback by displaying an info message if no interactions are chosen." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -148,7 +148,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1734969079504</updated>
-      <workItem from="1735984492000" duration="23185000" />
+      <workItem from="1735984492000" duration="23560000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -238,7 +238,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736016313199</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="updated decorations on spinsys">
+      <option name="closed" value="true" />
+      <created>1736016383627</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1736016383627</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update interaction selection logic in SIMPSON spinsys generation&#10;&#10;Clarified instructions for selecting interactions and added a validation to ensure that interactions are selected before generating the simulation file. Improved user feedback by displaying an info message if no interactions are chosen.">
+      <option name="closed" value="true" />
+      <created>1736016687098</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1736016687098</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +268,8 @@
     <MESSAGE value="updated path on support file" />
     <MESSAGE value="updated path on support file params" />
     <MESSAGE value="updated decorations on spinsys" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated decorations on spinsys" />
+    <MESSAGE value="Update interaction selection logic in SIMPSON spinsys generation&#10;&#10;Clarified instructions for selecting interactions and added a validation to ensure that interactions are selected before generating the simulation file. Improved user feedback by displaying an info message if no interactions are chosen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update interaction selection logic in SIMPSON spinsys generation&#10;&#10;Clarified instructions for selecting interactions and added a validation to ensure that interactions are selected before generating the simulation file. Improved user feedback by displaying an info message if no interactions are chosen." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736012192518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\github\simpson_gui\simpson_gui" />

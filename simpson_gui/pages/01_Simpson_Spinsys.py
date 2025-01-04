@@ -333,7 +333,7 @@ def main():
     st.subheader ( 'Please press generate to get the code for SIMPSON file:' )
 
     if st.button("Generate"):
-        if list_of_interactions is not None:
+        if not list_of_interactions:
             spinsys_code = ("spinsys { \n"
                             + '\t nuclei    ' + ' '.join ( nuc ) + '\n'
                             + '\t channels  ' + '   ' + ' '.join ( channels ) + '\n'
