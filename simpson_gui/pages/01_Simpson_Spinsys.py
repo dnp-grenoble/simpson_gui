@@ -75,7 +75,7 @@ def xyz_file_to_dipolar_data(xyzfile , nuc, num_nuc_func, table_of_nuclei) :
     for idx, nucleus in enumerate(nuc):
         gyr_atom[idx] = table_of_nuclei[table_of_nuclei.Name.isin([nucleus]) == True]['GyrHz'].values
 
-    st.write(gyr_atom)
+
 
     dist = np.zeros ( [ np.shape ( coord_xyz )[ 0 ] , np.shape ( coord_xyz )[ 0 ] ] )
     dip = np.zeros ( [ np.shape ( coord_xyz )[ 0 ] , np.shape ( coord_xyz )[ 0 ] ] )
@@ -290,7 +290,7 @@ def main():
 
 
     #%%%% Final Output
-    st.markdown ( 'Please press generate to get the code for SIMPSON file:' )
+
 
     options = ['CS', 'J', 'dip', 'quad']
 
@@ -314,6 +314,8 @@ def main():
     else:
         str_q = " "
 
+    st.subheader ("Click on the interactions that you want")
+
     dict_interaction = {'CS': str_cs ,
                         'J': str_j,
                         'dip': str_d,
@@ -324,6 +326,9 @@ def main():
 
     for interactions in list_of_interactions:
         code_text = code_text + dict_interaction[interactions] + "\n"
+
+    st.divider()
+    st.subheader ( 'Please press generate to get the code for SIMPSON file:' )
 
     if st.button("Generate"):
         spinsys_code = ("spinsys { \n"

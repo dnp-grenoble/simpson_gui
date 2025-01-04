@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="updated path">
-      <change beforePath="$PROJECT_DIR$/simpson_gui/pages/02_Simpson_Parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/02_Simpson_Parameters.py" afterDir="false" />
+    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="updated path on support file params">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpson_gui/pages/01_Simpson_Spinsys.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/01_Simpson_Spinsys.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +151,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1734969079504</updated>
-      <workItem from="1735984492000" duration="21257000" />
+      <workItem from="1735984492000" duration="22776000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -200,7 +201,31 @@
       <option name="project" value="LOCAL" />
       <updated>1736013280191</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="updated path on support file">
+      <option name="closed" value="true" />
+      <created>1736013693308</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1736013693308</updated>
+    </task>
+    <task id="LOCAL-00008" summary="updated path on support file">
+      <option name="closed" value="true" />
+      <created>1736013700333</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1736013700333</updated>
+    </task>
+    <task id="LOCAL-00009" summary="updated path on support file params">
+      <option name="closed" value="true" />
+      <created>1736013813004</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1736013813004</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +236,9 @@
     <MESSAGE value="finished par section of the app and created pages" />
     <MESSAGE value="added requirements file" />
     <MESSAGE value="updated path" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated path" />
+    <MESSAGE value="updated path on support file" />
+    <MESSAGE value="updated path on support file params" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated path on support file params" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736012192518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\github\simpson_gui\simpson_gui" />
