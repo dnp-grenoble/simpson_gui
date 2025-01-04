@@ -3,6 +3,7 @@ import re
 import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
+import os
 
 def zcw_sequence(n, zcw_type = 1) :
     """
@@ -45,9 +46,15 @@ def zcw_sequence(n, zcw_type = 1) :
 
 
 def repulsion_sequence(n) :
-    num_orientations = np.loadtxt( '../resources/repangles_num.txt' , dtype=float )
-    alpha_angles = np.loadtxt( '../resources/repangles_alpha.txt' , dtype=float )
-    beta_angles = np.loadtxt ( '../resources/repangles_beta.txt' , dtype=float )
+    script_dir = os.path.dirname ( __file__ )
+    num_orientations_file = os.path.join ( script_dir , '../resources/repangles_num.txt' )
+    num_orientations = np.loadtxt( num_orientations_file , dtype=float )
+
+    alpha_file = os.path.join ( script_dir , '../resources/repangles_alpha.txt' )
+    alpha_angles = np.loadtxt( alpha_file , dtype=float )
+
+    beta_file = os.path.join ( script_dir , '../resources/repangles_beta.txt' )
+    beta_angles = np.loadtxt ( beta_file , dtype=float )
     idx = np.where(num_orientations == n)[0]
 
     alpha_rep = alpha_angles[:, idx].flatten()
@@ -249,7 +256,11 @@ def main () :
     for methods in method_of_sim:
         gen_str_method = gen_str_method + methods + " "
 
-    st.image('resources/prop_methods.jpg', width=256, caption="Performance comparison of different strategies implemented in "
+    script_dir = os.path.dirname ( __file__ )
+    prop_image_file = os.path.join ( script_dir , 'resources/prop_methods.jpg' )
+
+
+    st.image( prop_image_file, width=256, caption="Performance comparison of different strategies implemented in "
                                                               "SIMPSON for propagator calculation for one carbon and 1–9 protons"
                                                               "Tošner, Z. ‘Computer-Intensive Simulation of Solid-State NMR Experiments Using SIMPSON’. JMR 246 (2014): 79–93. https://doi.org/10.1016/j.jmr.2014.07.002."
              )
