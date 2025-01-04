@@ -265,7 +265,7 @@ def main():
     #%% Interactions
 
     st.header ( "*Interactions*" , divider=True )
-    st.info("Click on the check boxes to add interactions. You can add rows by clicking on the + sign as you hover", icon="ℹ️")
+    st.info("Click on the check boxes to add interactions. You can add rows by clicking on the + sign as you hover")
     result_df_cs = None
     result_df_j = None
     result_df_d = None
@@ -315,7 +315,7 @@ def main():
     else:
         str_q = " "
 
-    st.info ("**Finally, click on the interactions that you want to be included in your simulation file, before you generate the file** ", icon="ℹ️")
+    st.info ("**Finally, click on the interactions that you want to be included in your simulation file, before you generate the file** ")
 
     dict_interaction = {'CS': str_cs ,
                         'J': str_j,
