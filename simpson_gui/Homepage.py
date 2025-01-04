@@ -1,5 +1,4 @@
 import streamlit as st
-from st_pages import Page, Section, show_pages, add_indentation
 
 col1, col2, col3 = st.columns(3,vertical_alignment="bottom", gap="medium")
 with col1:

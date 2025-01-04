@@ -5,4 +5,7 @@
     <orderEntry type="jdk" jdkName="C:\Users\subhr\miniforge3\envs\nmr" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="removeUnused" value="true" />
+  </component>
 </module>
