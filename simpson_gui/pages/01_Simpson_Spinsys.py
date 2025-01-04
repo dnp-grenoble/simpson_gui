@@ -265,7 +265,7 @@ def main():
     #%% Interactions
 
     st.header ( "*Interactions*" , divider=True )
-    st.write("Click on the check boxes to add interactions. You can add rows by clicking on the + sign as you hover")
+    st.info("Click on the check boxes to add interactions. You can add rows by clicking on the + sign as you hover", icon="ℹ️")
     result_df_cs = None
     result_df_j = None
     result_df_d = None
@@ -339,6 +339,7 @@ def main():
                         + "\t " + code_text + '\n'
                         + "}")
         st.code(spinsys_code, language='tcl')
+        st.balloons()
 
 
 if __name__ == '__main__':
