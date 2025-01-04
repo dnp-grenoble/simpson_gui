@@ -339,7 +339,7 @@ def main():
                         + "\t " + code_text + '\n'
                         + "}")
         st.code(spinsys_code, language='tcl')
-        st.balloons()
+
 
 
 if __name__ == '__main__':
