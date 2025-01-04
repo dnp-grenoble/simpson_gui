@@ -257,7 +257,7 @@ def main () :
         gen_str_method = gen_str_method + methods + " "
 
     script_dir = os.path.dirname ( __file__ )
-    prop_image_file = os.path.join ( script_dir , 'resources/prop_methods.jpg' )
+    prop_image_file = os.path.join ( script_dir , '../resources/prop_methods.jpg' )
 
 
     st.image( prop_image_file, width=256, caption="Performance comparison of different strategies implemented in "
