@@ -1,12 +1,18 @@
 import streamlit as st
+import os
+
+script_dir = os.path.dirname ( __file__ )
+gre_image_file = os.path.join ( script_dir , 'resources/dnp_grenoble_logo.png' )
+python_image_file = os.path.join ( script_dir , 'resources/python.png' )
+st_image_file = os.path.join ( script_dir , 'resources/streamlit.png' )
 
 col1, col2, col3 = st.columns(3,vertical_alignment="bottom", gap="medium")
 with col1:
-    st.image('resources/dnp_grenoble_logo.png', use_container_width=True)
+    st.image(gre_image_file, use_container_width=True)
 with col2:
-    st.image('resources/python.png', use_container_width=True)
+    st.image(python_image_file, use_container_width=True)
 with col3:
-    st.image('resources/streamlit.png', use_container_width=True)
+    st.image(st_image_file, use_container_width=True)
 
 
 st.markdown('''**Welcome to the SIMPSON GUI**  

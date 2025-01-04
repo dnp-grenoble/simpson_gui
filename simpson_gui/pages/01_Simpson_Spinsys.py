@@ -5,6 +5,8 @@ import os
 import pandas as pd
 from scipy.spatial.transform import Rotation as Rot
 
+
+
 #%% Functions
 def dist2dipole(choice_nuc1 , choice_nuc2 , distance, table_of_nuclei) :
     """
