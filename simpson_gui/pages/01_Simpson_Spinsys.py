@@ -305,7 +305,7 @@ def main():
     else:
         str_d = " "
 
-    if result_df_j.empty():
+    if result_df_j.empty:
         str_j = " "
     else:
         str_j = result_df_j.to_string(index=False, header=False)
