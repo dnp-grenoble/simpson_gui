@@ -315,12 +315,13 @@ def main():
     else:
         str_q = " "
 
-    st.markdown ("**Click on the interactions that you want, before you generate the file** ")
+    st.markdown ("**Finally, click on the interactions that you want to be included in your simulation file, before you generate the file** ")
 
     dict_interaction = {'CS': str_cs ,
                         'J': str_j,
                         'dip': str_d,
                         'quad': str_q}
+    list_of_interactions = None
     list_of_interactions = st.segmented_control("Interactions", options, selection_mode="multi")
 
     code_text = ""
@@ -332,12 +333,15 @@ def main():
     st.subheader ( 'Please press generate to get the code for SIMPSON file:' )
 
     if st.button("Generate"):
-        spinsys_code = ("spinsys { \n"
-                        + '\t nuclei    ' + ' '.join ( nuc ) + '\n'
-                        + '\t channels  ' + '   ' + ' '.join ( channels ) + '\n'
-                        + "\t " + code_text + '\n'
-                        + "}")
-        st.code(spinsys_code, language='tcl')
+        if list_of_interactions is not None:
+            spinsys_code = ("spinsys { \n"
+                            + '\t nuclei    ' + ' '.join ( nuc ) + '\n'
+                            + '\t channels  ' + '   ' + ' '.join ( channels ) + '\n'
+                            + "\t " + code_text + '\n'
+                            + "}")
+            st.code(spinsys_code, language='tcl')
+        else:
+            st.info('You have to select the interactions first', icon="ℹ️")
 
 if __name__ == '__main__':
     st.title("To generate spinsys section of SIMPSON")
