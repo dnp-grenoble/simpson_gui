@@ -315,7 +315,7 @@ def main():
     else:
         str_q = " "
 
-    st.write ("Click on the interactions that you want, before you generate the file ")
+    st.markdown ("**Click on the interactions that you want, before you generate the file** ")
 
     dict_interaction = {'CS': str_cs ,
                         'J': str_j,
