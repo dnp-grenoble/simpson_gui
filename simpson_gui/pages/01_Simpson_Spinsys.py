@@ -265,6 +265,7 @@ def main():
     #%% Interactions
 
     st.header ( "*Interactions*" , divider=True )
+    st.write("Click on the check boxes to add interactions. You can add rows by clicking on the + sign as you hover")
     result_df_cs = None
     result_df_j = None
     result_df_d = None
@@ -314,7 +315,7 @@ def main():
     else:
         str_q = " "
 
-    st.subheader ("Click on the interactions that you want")
+    st.write ("Click on the interactions that you want, before you generate the file ")
 
     dict_interaction = {'CS': str_cs ,
                         'J': str_j,
