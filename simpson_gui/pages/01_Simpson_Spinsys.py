@@ -246,7 +246,7 @@ def main():
     """
     #%% Load nuclei data from file
     script_dir = os.path.dirname ( __file__ )
-    csv_file = os.path.join ( '{0}../resources/NMR_freq_table.csv'.format ( script_dir ) )
+    csv_file = os.path.join ( script_dir, '../resources/NMR_freq_table.csv' )
 
 
     table_of_nuclei = pd.read_csv ( csv_file )
