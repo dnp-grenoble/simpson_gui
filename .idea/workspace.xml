@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Remove unnecessary st.balloons() and icon arguments in st.info&#10;&#10;The st.balloons() call was removed as it did not serve a purpose and could distract users. Additionally, icon arguments in st.info were removed for simplicity and to maintain a cleaner user interface. These changes enhance the overall user experience and readability." />
+    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Fix incorrect method call for checking DataFrame emptiness&#10;&#10;Replaced `empty()` with the correct property `empty` while checking if a DataFrame is empty. This resolves a potential runtime error caused by improper usage of the pandas DataFrame API.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpson_gui/pages/01_Simpson_Spinsys.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/01_Simpson_Spinsys.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -148,7 +151,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1734969079504</updated>
-      <workItem from="1735984492000" duration="24484000" />
+      <workItem from="1735984492000" duration="24852000" />
+      <workItem from="1736063791205" duration="642000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -294,7 +298,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736017453532</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Remove unnecessary st.balloons() and fix result_df_j check  &#10;&#10;Eliminated the st.balloons() call and redundant icon arguments in st.info for a cleaner and simpler user interface. Also corrected the logic in result_df_j to ensure proper handling of empty DataFrame values. These updates improve usability, readability, and functionality.">
+      <option name="closed" value="true" />
+      <created>1736017809931</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1736017809931</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Fix incorrect method call for checking DataFrame emptiness&#10;&#10;Replaced `empty()` with the correct property `empty` while checking if a DataFrame is empty. This resolves a potential runtime error caused by improper usage of the pandas DataFrame API.">
+      <option name="closed" value="true" />
+      <created>1736017881936</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1736017881936</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,10 +333,12 @@
     <MESSAGE value="Refactor interaction selection and improve feedback messages.&#10;&#10;Replaced `st.markdown` with `st.info` for clearer user instructions and enhanced feedback with an icon. Removed redundant conditional for interaction selection to simplify the code and ensure consistent code generation behavior." />
     <MESSAGE value="Remove unnecessary st.balloons() call from spin system page.&#10;&#10;The st.balloons() call was removed as it served no functional purpose in this context and could distract users. This change simplifies the interface and improves user experience." />
     <MESSAGE value="Remove unnecessary st.balloons() and icon arguments in st.info&#10;&#10;The st.balloons() call was removed as it did not serve a purpose and could distract users. Additionally, icon arguments in st.info were removed for simplicity and to maintain a cleaner user interface. These changes enhance the overall user experience and readability." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unnecessary st.balloons() and icon arguments in st.info&#10;&#10;The st.balloons() call was removed as it did not serve a purpose and could distract users. Additionally, icon arguments in st.info were removed for simplicity and to maintain a cleaner user interface. These changes enhance the overall user experience and readability." />
+    <MESSAGE value="Remove unnecessary st.balloons() and fix result_df_j check  &#10;&#10;Eliminated the st.balloons() call and redundant icon arguments in st.info for a cleaner and simpler user interface. Also corrected the logic in result_df_j to ensure proper handling of empty DataFrame values. These updates improve usability, readability, and functionality." />
+    <MESSAGE value="Fix incorrect method call for checking DataFrame emptiness&#10;&#10;Replaced `empty()` with the correct property `empty` while checking if a DataFrame is empty. This resolves a potential runtime error caused by improper usage of the pandas DataFrame API." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix incorrect method call for checking DataFrame emptiness&#10;&#10;Replaced `empty()` with the correct property `empty` while checking if a DataFrame is empty. This resolves a potential runtime error caused by improper usage of the pandas DataFrame API." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736012192518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\github\simpson_gui\simpson_gui" />
+    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736064575211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\github\simpson_gui\simpson_gui" />
     <SUITE FILE_PATH="coverage/simpson_gui$ZCW_sequence_generator.coverage" NAME="ZCW_sequence_generator Coverage Results" MODIFIED="1735988721560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simpson_gui" />
   </component>
 </project>

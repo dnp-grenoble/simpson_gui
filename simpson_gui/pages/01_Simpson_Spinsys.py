@@ -63,7 +63,7 @@ def xyz_file_to_dipolar_data(xyzfile , nuc, num_nuc_func, table_of_nuclei) :
     and the Euler angles between the two tensors.
     """
 
-    mol = pd.read_csv ( xyzfile , sep='\s+' , skiprows=2 , names=[ 'atom' , 'x' , 'y' , 'z' ] , index_col=False )
+    mol = pd.read_csv ( xyzfile , sep=r'\s+' , skiprows=2 , names=[ 'atom' , 'x' , 'y' , 'z' ] , index_col=False )
     if len ( mol ) != num_nuc_func :
         raise ValueError ( "The number of Nuclei do not match" )
     coord_xyz = mol[ [ 'x' , 'y' , 'z' ] ].to_numpy ()
@@ -151,10 +151,10 @@ def dipolar_coupling_tensor(num_nuc_d, nuc, table_of_nuclei):
     :param table_of_nuclei: database of nuclei
     :return: dataframe containing the dipolar coupling, euler angles and the nuclei numbers.
     """
-    result_df_d_fn = None
+    result_df_d_fn = pd.DataFrame ()
     st.subheader ( "Dipolar Coupling" , divider=True )
     # if 'select_dipolar_method' not in st.session_state :
-    st.session_state.select_dipolar_method = "None"
+    st.session_state.select_dipolar_method = result_df_d_fn
     select_dipolar_method = st.segmented_control ( "Method" , options=[ "Direct" , "Distance" , "File" ] , selection_mode="single")
     if select_dipolar_method == 'Direct' :
         d_coupling_df = pd.DataFrame ( columns=[ 'i' , 'j' , 'dip' , 'alpha' , 'beta' , 'gamma' ] )
@@ -266,10 +266,10 @@ def main():
 
     st.header ( "*Interactions*" , divider=True )
     st.info("Click on the check boxes to add interactions. You can add rows by clicking on the + sign as you hover")
-    result_df_cs = None
-    result_df_j = None
-    result_df_d = None
-    result_df_q = None
+    result_df_cs = pd.DataFrame ()
+    result_df_j = pd.DataFrame ()
+    result_df_d = pd.DataFrame ()
+    result_df_q = pd.DataFrame ()
 
 
     if st.checkbox("Chemical Shift"):
@@ -295,12 +295,12 @@ def main():
 
     options = ['CS', 'J', 'dip', 'quad']
 
-    if result_df_cs is not None:
+    if not result_df_cs.empty :
         str_cs = result_df_cs.to_string(index=False, header=False)
     else:
         str_cs = " "
 
-    if result_df_d is not None:
+    if not result_df_d.empty :
         str_d = result_df_d.to_string(index=False, header=False)
     else:
         str_d = " "
@@ -310,8 +310,7 @@ def main():
     else:
         str_j = result_df_j.to_string(index=False, header=False)
 
-
-    if result_df_q is not None:
+    if not result_df_q.empty :
         str_q = result_df_q.to_string(index=False, header=False)
     else:
         str_q = " "
