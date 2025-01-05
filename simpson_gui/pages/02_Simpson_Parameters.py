@@ -265,10 +265,7 @@ def main () :
                                                               "Tošner, Z. ‘Computer-Intensive Simulation of Solid-State NMR Experiments Using SIMPSON’. JMR 246 (2014): 79–93. https://doi.org/10.1016/j.jmr.2014.07.002."
              )
 
-
-
-    par_code = (" par {  \n "
-                "\t proton_frequency \t" + f"{field*1e6} \n"
+    par_code = (" par {  \n \t proton_frequency \t" + f"{float ( field ) * (10.0 ** 6):.4e} \n"
                 "\t spinning_rate \t" + f"{spinning_frequency} \n"
                 "\t crystal_file \t" + f"{powder_file} \n"
                 "\t gamma_angles \t" + f"{gamma_angles} \n"
