@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/simpson_gui.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simpson_gui.iml" afterDir="false" />
+    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.">
+      <change afterPath="$PROJECT_DIR$/simpson_gui/pages/03_Simpson_Pulse_Program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -53,12 +56,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.03_Simpson_Pulse_Program.executor": "Run",
     "Python.genrep.executor": "Run",
     "Python.simpson_gui.executor": "Run",
     "Python.streamlit.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "develop",
     "last_opened_file_path": "C:/Users/subhr/PycharmProjects/simpson_gui/simpson_gui",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -162,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735856633825</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.">
+      <option name="closed" value="true" />
+      <created>1736173445437</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1736173445437</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,9 +182,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="updating powder files" />
+    <MESSAGE value="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736170799176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\subhr\PycharmProjects\simpson_gui\simpson_gui" />
+    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736181849205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\subhr\PycharmProjects\simpson_gui\simpson_gui" />
+    <SUITE FILE_PATH="coverage/simpson_gui$03_Simpson_Pulse_Program.coverage" NAME="03_Simpson_Pulse_Program Coverage Results" MODIFIED="1736180637621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simpson_gui/pages" />
   </component>
 </project>
