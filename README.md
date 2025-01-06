@@ -1,4 +1,5 @@
-#SIMPSON GUI
+## SIMPSON GUI
+---
 
 The scripts are to create a Graphical User Interface to write SIMPSON files for NMR Simulations.
 It will help the user to generate files with useful stuff like xyz file for dipolar coupling, dipolar coupling from distance, choose appropriate method of propagation, appropriate verbose for simulation etc.
