@@ -202,6 +202,46 @@ def generate_decoupling(type) :
         """
         return decoupling_code
 
+    def decoupling_wpmlg() :
+        decoupling_code = f"""
+            
+            proc generate_wpmlgm {{N rfk sup}} {{
+                global par
+                set rf [expr $rfk*1000]
+                set lgoffset [expr $rf/sqrt(2.0)] ;# calculation of the LG offset
+                set taulg [expr 1.0/sqrt(pow($rf,2)+pow($lgoffset,2))] ;# calculation of the total length of the LG pulse
+                set wpmlgph [expr $taulg*$lgoffset*360/$N] ;# calculates the phase of the first pulse of wPMLG
+                set phshift [expr $wpmlgph/2] ;# this is a half phase increment/decrement shift in the first pulse of PMLG
+                set taupmlg [expr $taulg*1.0e6/$N] ;# calculates the length of each pulse of pmlg
+                set window 4.6
+                set phpmlg [expr 180.0 - $phshift]
+                
+                for {{set i 1}} {{$i <= $N}} {{incr i}} {{
+                    pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]
+                    # puts "pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]"
+                    set phpmlg [expr {{$phpmlg - $wpmlgph}}] 
+                }}
+                set phpmlg [expr {{$phpmlg + $wpmlgph + 180}}]
+                for {{set i 1}} {{$i <= $N}} {{incr i}} {{
+                    pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]
+                    # puts "pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]"
+                    set phpmlg [expr {{$phpmlg + $wpmlgph}}] 
+                }}
+                delay $window
+            }}
+            
+            proc pulseq {{}} {{
+               global par
+               
+               for {{set i 1}} {{$i <= $par(np)/2}} {{incr i}} {{
+                acq
+                generate_wpmlgm 5 100 0
+                acq
+                generate_wpmlgm 5 100 180
+               }}
+            }}
+        """
+
     # Map decoupling sequences to their corresponding functions
     decoupling_generators = {
         "cw" : decoupling_cw ,
@@ -210,7 +250,9 @@ def generate_decoupling(type) :
         "xix" : decoupling_xix ,
         "spinal64" : decoupling_spinal64 ,
         "rcw" : decoupling_rcw ,
+        "wpmlg" : decoupling_wpmlg,
     }
+
 
     # Return the corresponding code for the given type
     if type in decoupling_generators :
@@ -269,25 +311,31 @@ def generate_heteronuclear_recoupling(type) :
             prop 2
             prop 3 $s
             
-            acq $par(ph)
+            acq $par(
             }}"""
         return recoupling_code
 
     def redor():
         recoupling_code = f"""
+            
+            set rf 100000
+            set t180 pr 0.5e6/$rf]
+            set tr   [expr 1.0e6/$par(spin_rate)]
+            set tr2  [expr $tr-$t180]   
+            
             reset
-            delay $par(tr2)
-            pulse $par(t180) 0 x $par(rf) x
-            delay $par(tr2)
-            pulse $par(t180) 0 x $par(rf) y
+            delay $tr2
+            pulse $t180 0 x $rf x
+            delay $tr2
+            pulse $t180 0 x $rf y
             store 1
             
             reset
             acq
-            delay $par(tr2)
-            pulse $par(t180) 0 x $par(rf) x
-            delay $par(tr2)
-            pulse $par(t180) $par(rf) x 0 x
+            delay $tr2
+            pulse $t180 0 x $rf x
+            delay $tr2
+            pulse $t180 $rf x 0 x
             prop 1
             store 2
             acq
@@ -331,8 +379,16 @@ if heteronuclear_recoupling is not None:
 
 st.header('Decoupling')
 st.divider()
-st.subheader('Homonuclear Decoupling')
+st.subheader('Heteronuclear Decoupling')
 option_heteronuclear_decoupling = ["cw", "tppm", "swftppm", "xix", "spinal64", "rcw"]
 heteronuclear_decoupling = st.selectbox("Heteronuclear Decoupling Sequence:", option_heteronuclear_decoupling, index=None)
 if heteronuclear_decoupling is not None:
     st.code(generate_decoupling(heteronuclear_decoupling), language='tcl')
+
+
+st.subheader('Homonuclear Decoupling')
+option_homonuclear_decoupling = ["LG", "FSLG", "wPMLGmmbar", "LG4"]
+
+homonuclear_decoupling = st.selectbox("Homonuclear Decoupling Sequence:", option_homonuclear_decoupling, index=None)
+if homonuclear_decoupling is not None:
+    st.code(generate_decoupling(homonuclear_decoupling), language='tcl')
