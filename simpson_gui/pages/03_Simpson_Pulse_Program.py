@@ -132,11 +132,207 @@ def generate_recoupling(type):
         raise ValueError(f"Unknown pulse type: {type}")
 
 
-def heteronuclear_decoupling(type):
-    def tppm():
+def generate_decoupling(type) :
+    def decoupling_cw() :
+        decoupling_code = f"""
+        acq_block {{
+            pulse $par(tdec) 0 x $par(rf) 0
+            pulse $par(tdec) 0 x $par(rf) 0
+        }}
+        """
+        return decoupling_code
 
+    def decoupling_tppm() :
+        decoupling_code = f"""
+        acq_block {{
+            pulse $par(tdec) 0 x $par(rf) $par(ph)
+            pulse $par(tdec) 0 x $par(rf) -$par(ph)
+        }}
+        """
+        return decoupling_code
 
+    def decoupling_swftppm() :
+        decoupling_code = f"""
+        acq_block {{
+            foreach mul [list 0.78 0.86 0.94 0.96 0.98 1 1.02 1.04 1.06 1.14 1.22] {{
+                pulse [expr $mul*$par(tdec)] 0 0 $par(rf) $par(ph)
+                pulse [expr $mul*$par(tdec)] 0 0 $par(rf) -$par(ph)
+            }}
+        }}
+        """
+        return decoupling_code
+
+    def decoupling_xix() :
+        decoupling_code = f"""
+        acq_block {{
+            pulse [expr $par(tr)*$par(xix)] 0 x $par(rf) x
+            pulse [expr $par(tr)*$par(xix)] 0 x $par(rf) -x
+        }}
+        """
+        return decoupling_code
+
+    def decoupling_spinal64() :
+        decoupling_code = f"""
+        acq_block {{
+            foreach sup [list 1 -1 -1 1 -1 1 1 -1] {{
+                pulse $par(tdec) 0 x $par(rf) [expr $sup*$par(ph)]
+                pulse $par(tdec) 0 x $par(rf) [expr -$sup*$par(ph)]
+                pulse $par(tdec) 0 x $par(rf) [expr $sup*($par(ph)+5)]
+                pulse $par(tdec) 0 x $par(rf) [expr $sup*(-$par(ph)-5)]
+                pulse $par(tdec) 0 x $par(rf) [expr $sup*($par(ph)+10)]
+                pulse $par(tdec) 0 x $par(rf) [expr $sup*(-$par(ph)-10)]
+                pulse $par(tdec) 0 x $par(rf) [expr $sup*($par(ph)+5)]
+                pulse $par(tdec) 0 x $par(rf) [expr $sup*(-$par(ph)-5)]
+            }}
+        }}
+        """
+        return decoupling_code
+
+    def decoupling_rcw() :
+        decoupling_code = f"""
+        acq_block {{
+            pulse [expr $par(tr)-0.5*$par(t180)] 0 0 $par(rf) 0
+            pulse $par(t180) 0 0 $par(rf) 90
+            pulse [expr $par(tr)-$par(t180)] 0 0 $par(rf) 0
+            pulse $par(t180) 0 0 $par(rf) 0
+            pulse [expr $par(tr)-$par(t180)] 0 0 $par(rf) 0
+            pulse $par(t180) 0 0 $par(rf) 90
+            pulse [expr $par(tr)-0.5*$par(t180)] 0 0 $par(rf) 0
+        }}
+        """
+        return decoupling_code
+
+    # Map decoupling sequences to their corresponding functions
+    decoupling_generators = {
+        "cw" : decoupling_cw ,
+        "tppm" : decoupling_tppm ,
+        "swftppm" : decoupling_swftppm ,
+        "xix" : decoupling_xix ,
+        "spinal64" : decoupling_spinal64 ,
+        "rcw" : decoupling_rcw ,
+    }
+
+    # Return the corresponding code for the given type
+    if type in decoupling_generators :
+        return decoupling_generators[ type ] ()
+    else :
+        raise ValueError ( f"Unknown decoupling type: {type}" )
+
+def generate_heteronuclear_recoupling(type) :
+
+    def zftedor():
+        recoupling_code = f"""
+            set rfC  150000
+            set rfP  150000
+            set tr    [expr 1.0e6/$par(spin_rate)]
+            set t90C  [expr 0.25e6/$rfC]
+            set t180C [expr 2.0*$t90C]
+            set t90P  [expr 0.25e6/$rfP]
+            set t180P [expr 2.0*$t90P]
+            
+            
+            reset
+            delay [expr $tr/2.0-$t180P]
+            pulse $t180P 0 x $rfP x    
+            delay [expr $tr/2.0-$t180P]
+            pulse $t180P 0 x $rfP y
+            store 1
+            
+            reset
+            delay [expr 1*$tr-$t180C/2]
+            pulse $t180C $rfC x 0 x
+            delay [expr 1*$tr-$t180C/2]
+            store 2
+            reset
+            
+            reset
+            pulse $t180P 0 x $rfP x  
+            delay [expr $tr/2.0-$t180P]
+            pulse $t180P 0 x $rfP y  
+            delay [expr $tr/2.0-$t180P]
+            store 3
+            
+            
+            for {{set s 0}}{{$s < $par(np)}} {{incr s}} {{
+            reset
+            
+            prop 1 $s
+            prop 2
+            prop 3 $s
+            
+            
+            pulseid 1 250000 x 250000 x
+            pulseid 1 250000 x 250000 $par(ph)
+            
+            
+            prop 1 $s
+            prop 2
+            prop 3 $s
+            
+            acq $par(ph)
+            }}"""
+        return recoupling_code
+
+    def redor():
+        recoupling_code = f"""
+            reset
+            delay $par(tr2)
+            pulse $par(t180) 0 x $par(rf) x
+            delay $par(tr2)
+            pulse $par(t180) 0 x $par(rf) y
+            store 1
+            
+            reset
+            acq
+            delay $par(tr2)
+            pulse $par(t180) 0 x $par(rf) x
+            delay $par(tr2)
+            pulse $par(t180) $par(rf) x 0 x
+            prop 1
+            store 2
+            acq
+            
+            for {{set i 2}} {{$i < $par(np)}} {{incr i}} {{
+            reset
+            prop 1
+            prop 2
+            prop 1
+            store 2
+            acq
+            }}
+            """
+        return recoupling_code
+
+    recoupling_generators = {
+        "tedor" : zftedor ,
+        "redor" : redor ,
+        }
+
+    # Return the corresponding code for the given type
+    if type in recoupling_generators :
+        return recoupling_generators[ type ] ()
+    else :
+        raise ValueError ( f"Unknown decoupling type: {type}" )
+
+st.header('Recoupling')
+st.divider()
+st.subheader('Homonuclear Recoupling')
 option_homonuclear_recoupling = ["s3", "brs3", "sr26", "postc7", "rseq", "baba"]
-homonuclear_rec = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
-st.code(generate_recoupling(homonuclear_rec), language='tcl')
+homonuclear_recoupling = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
+if homonuclear_recoupling is not None:
+    st.code(generate_recoupling(homonuclear_recoupling), language='tcl')
 
+st.subheader('Heteronuclear Recoupling')
+option_heteronuclear_recoupling = ["tedor", "redor"]
+heteronuclear_recoupling = st.selectbox("Heteronuclear Recoupling Sequence:", option_heteronuclear_recoupling, index=None)
+if heteronuclear_recoupling is not None:
+    st.code(generate_heteronuclear_recoupling(heteronuclear_recoupling), language='tcl')
+
+
+st.header('Decoupling')
+st.divider()
+st.subheader('Homonuclear Decoupling')
+option_heteronuclear_decoupling = ["cw", "tppm", "swftppm", "xix", "spinal64", "rcw"]
+heteronuclear_decoupling = st.selectbox("Heteronuclear Decoupling Sequence:", option_heteronuclear_decoupling, index=None)
+if heteronuclear_decoupling is not None:
+    st.code(generate_decoupling(heteronuclear_decoupling), language='tcl')
