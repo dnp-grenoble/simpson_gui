@@ -368,7 +368,38 @@ st.subheader('Homonuclear Recoupling')
 option_homonuclear_recoupling = ["s3", "brs3", "sr26", "postc7", "rseq", "baba"]
 homonuclear_recoupling = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
 if homonuclear_recoupling is not None:
-    st.code(generate_recoupling(homonuclear_recoupling), language='tcl')
+    max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
+    dq_filter_choice = st.toggle("Double Quantum Filter")
+    if dq_filter_choice:
+        dq_filter = "matrix set 2 totalcoherence {2 -2} "
+        filter_dq = "filter 2"
+    else:
+        dq_filter = " "
+        filter_dq = " "
+    pulse_sequence = f"""
+                    proc pulseq {{}}  {{
+        maxdt {max_delta_time}
+        {dq_filter}
+        
+        {generate_recoupling(homonuclear_recoupling)}
+        store 1 ; #stores the propagator for 1 block of S3
+        reset ; # resets the density matrix to rho0
+        store 3 ; # identity prop
+        acq ; # take first data point i.e. zero
+
+        # loop below reuses stored propagators for the rest of acq
+        for {{set j 1}} {{$j < $par(np)}} {{incr j}} {{
+        reset
+        prop 3 ; # call the identity propagator for the first time and then calls 1 to j-1 S3's
+        prop 1 ; # call jth S3
+        store 3 ; # store it in 3 and reused later
+        {filter_dq}
+        prop 3 ; # reconversion
+        acq ; # detect 1 point
+        }}
+        }}
+        """
+    st.code(pulse_sequence, language='tcl')
 
 st.subheader('Heteronuclear Recoupling')
 option_heteronuclear_recoupling = ["tedor", "redor"]
@@ -383,7 +414,14 @@ st.subheader('Heteronuclear Decoupling')
 option_heteronuclear_decoupling = ["cw", "tppm", "swftppm", "xix", "spinal64", "rcw"]
 heteronuclear_decoupling = st.selectbox("Heteronuclear Decoupling Sequence:", option_heteronuclear_decoupling, index=None)
 if heteronuclear_decoupling is not None:
-    st.code(generate_decoupling(heteronuclear_decoupling), language='tcl')
+    max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
+    pulse_sequence = f"""
+    proc pulseq{{}} {{
+    maxdt {max_delta_time}
+    {generate_decoupling(heteronuclear_decoupling)}
+    }}
+    """
+    st.code(pulse_sequence, language='tcl')
 
 
 st.subheader('Homonuclear Decoupling')
