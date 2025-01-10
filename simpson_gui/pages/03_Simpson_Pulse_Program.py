@@ -204,43 +204,87 @@ def generate_decoupling(type) :
 
     def decoupling_wpmlg() :
         decoupling_code = f"""
-            
-            proc generate_wpmlgm {{N rfk sup}} {{
-                global par
-                set rf [expr $rfk*1000]
-                set lgoffset [expr $rf/sqrt(2.0)] ;# calculation of the LG offset
-                set taulg [expr 1.0/sqrt(pow($rf,2)+pow($lgoffset,2))] ;# calculation of the total length of the LG pulse
-                set wpmlgph [expr $taulg*$lgoffset*360/$N] ;# calculates the phase of the first pulse of wPMLG
-                set phshift [expr $wpmlgph/2] ;# this is a half phase increment/decrement shift in the first pulse of PMLG
-                set taupmlg [expr $taulg*1.0e6/$N] ;# calculates the length of each pulse of pmlg
-                set window 4.6
-                set phpmlg [expr 180.0 - $phshift]
-                
-                for {{set i 1}} {{$i <= $N}} {{incr i}} {{
-                    pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]
-                    # puts "pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]"
-                    set phpmlg [expr {{$phpmlg - $wpmlgph}}] 
-                }}
-                set phpmlg [expr {{$phpmlg + $wpmlgph + 180}}]
-                for {{set i 1}} {{$i <= $N}} {{incr i}} {{
-                    pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]
-                    # puts "pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]"
-                    set phpmlg [expr {{$phpmlg + $wpmlgph}}] 
-                }}
-                delay $window
+            set rfk 100 ;# Power in kHz for decoupling
+            set N 5 ;# number of PMLG pulses here PMLG5
+            set phlist [list 0 180] 
+            set rf [expr $rfk*1000]
+            set lgoffset [expr $rf/sqrt(2.0)] ;# calculation of the LG offset
+            set taulg [expr 1.0/sqrt(pow($rf,2)+pow($lgoffset,2))] ;# calculation of the total length of the LG pulse
+            set wpmlgph [expr $taulg*$lgoffset*360/$N] ;# calculates the phase of the first pulse of wPMLG
+            set phshift [expr $wpmlgph/2] ;# this is a half phase increment/decrement shift in the first pulse of PMLG
+            set taupmlg [expr $taulg*1.0e6/$N] ;# calculates the length of each pulse of pmlg
+            set window 4.6
+            set phpmlg [expr 180.0 - $phshift]
+            set propno 0
+            foreach sup $phlist {{
+            for {{set i 1}} {{$i <= $N}} {{incr i}} {{
+                pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]
+                # puts "pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]"
+                set phpmlg [expr {{$phpmlg - $wpmlgph}}] 
             }}
-            
-            proc pulseq {{}} {{
-               global par
-               
-               for {{set i 1}} {{$i <= $par(np)/2}} {{incr i}} {{
-                acq
-                generate_wpmlgm 5 100 0
-                acq
-                generate_wpmlgm 5 100 180
-               }}
+            set phpmlg [expr {{$phpmlg + $wpmlgph + 180}}]
+            for {{set i 1}} {{$i <= $N}} {{incr i}} {{
+                pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]
+                # puts "pulse $taupmlg $rf [expr fmod($phpmlg + $sup, 360)]"
+                set phpmlg [expr {{$phpmlg + $wpmlgph}}] 
+            }}
+            delay $window
+            incr $propno
+            prop $propno
             }}
         """
+        return decoupling_code
+
+    def decoupling_fslg() :
+        decoupling_code = f"""
+            set rfk 100
+            set rf [expr $rfk*1000]
+            set lgoffset [expr $rf/sqrt(2.0)] ;# calculation of the LG offset
+            set taulg [expr 1e6/sqrt(pow($rf,2)+pow($lgoffset,2))] ;# calculation of the total length of the LG pulse
+            set window 4.6
+            set pma [expr 2.5*54.74/90]
+
+            for {{set i 1}} {{$i <= $par(np)/$par(N)}} {{incr i}} {{
+                pulseid $pma 100000 y
+                offset $lgoffset
+                pulse $taulg $rf 0
+                offset [expr -1*$lgoffset]
+                pulse $taulg $rf 180
+                offset 0
+                pulseid $pma 100000 -y
+                acq  
+                delay $window
+            }}
+        """
+        return decoupling_code
+
+    def decoupling_lg4()  :
+        decoupling_code = f"""
+            set rfk 100
+            set rf [expr $rfk*1000]
+            set lgoffset [expr $rf/sqrt(2.0)] ;# calculation of the LG offset
+            set taulg [expr 1e6/sqrt(pow($rf,2)+pow($lgoffset,2))] ;# calculation of the total length of the LG pulse
+            set window 4.6
+            set phadd 70
+            
+            for {{set i 1}} {{$i <= $par(np)/2}} {{incr i}} {{
+                offset $lgoffset
+                pulse $taulg $rf [expr 90-$phadd]
+                offset [expr -1*$lgoffset]
+                pulse $taulg $rf [expr 270-$phadd]
+                offset 0
+                delay $window
+                acq
+                offset [expr -1*$lgoffset]
+                pulse $taulg $rf [expr -90+$phadd]
+                offset $lgoffset
+                pulse $taulg $rf [expr -270+$phadd]
+                offset 0
+                acq
+                delay $window
+            }}
+        """
+        return decoupling_code
 
     # Map decoupling sequences to their corresponding functions
     decoupling_generators = {
@@ -251,6 +295,8 @@ def generate_decoupling(type) :
         "spinal64" : decoupling_spinal64 ,
         "rcw" : decoupling_rcw ,
         "wpmlg" : decoupling_wpmlg,
+        "fslg" : decoupling_fslg,
+        "lg4" : decoupling_lg4,
     }
 
 
@@ -264,6 +310,9 @@ def generate_heteronuclear_recoupling(type) :
 
     def zftedor():
         recoupling_code = f"""
+
+            matrix set 10 elements {{{{1 3}} {{2 4}} {{3 1}} {{4 2}}}}
+            
             set rfC  150000
             set rfP  150000
             set tr    [expr 1.0e6/$par(spin_rate)]
@@ -305,13 +354,13 @@ def generate_heteronuclear_recoupling(type) :
             
             pulseid 1 250000 x 250000 x
             pulseid 1 250000 x 250000 $par(ph)
-            
+            filter 10
             
             prop 1 $s
             prop 2
             prop 3 $s
             
-            acq $par(
+            acq
             }}"""
         return recoupling_code
 
@@ -364,69 +413,87 @@ def generate_heteronuclear_recoupling(type) :
 
 st.header('Recoupling')
 st.divider()
-st.subheader('Homonuclear Recoupling')
-option_homonuclear_recoupling = ["s3", "brs3", "sr26", "postc7", "rseq", "baba"]
-homonuclear_recoupling = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
-if homonuclear_recoupling is not None:
-    max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
-    dq_filter_choice = st.toggle("Double Quantum Filter")
-    if dq_filter_choice:
-        dq_filter = "matrix set 2 totalcoherence {2 -2} "
-        filter_dq = "filter 2"
-    else:
-        dq_filter = " "
-        filter_dq = " "
-    pulse_sequence = f"""
-                    proc pulseq {{}}  {{
-        maxdt {max_delta_time}
-        {dq_filter}
-        
-        {generate_recoupling(homonuclear_recoupling)}
-        store 1 ; #stores the propagator for 1 block of S3
-        reset ; # resets the density matrix to rho0
-        store 3 ; # identity prop
-        acq ; # take first data point i.e. zero
+with st.container(border=True):
 
-        # loop below reuses stored propagators for the rest of acq
-        for {{set j 1}} {{$j < $par(np)}} {{incr j}} {{
-        reset
-        prop 3 ; # call the identity propagator for the first time and then calls 1 to j-1 S3's
-        prop 1 ; # call jth S3
-        store 3 ; # store it in 3 and reused later
-        {filter_dq}
-        prop 3 ; # reconversion
-        acq ; # detect 1 point
-        }}
-        }}
-        """
-    st.code(pulse_sequence, language='tcl')
+    st.subheader('Homonuclear Recoupling')
+    option_homonuclear_recoupling = ["s3", "brs3", "sr26", "postc7", "rseq", "baba"]
+    homonuclear_recoupling = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
+    if homonuclear_recoupling is not None:
+        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
+        dq_filter_choice = st.toggle("Double Quantum Filter")
+        if dq_filter_choice:
+            dq_filter = "matrix set 2 totalcoherence {2 -2} "
+            filter_dq = "filter 2"
+        else:
+            dq_filter = " "
+            filter_dq = " "
+        pulse_sequence = f"""
+                        proc pulseq {{}}  {{
+            maxdt {max_delta_time}
+            {dq_filter}
+            
+            {generate_recoupling(homonuclear_recoupling)}
+            store 1 ; #stores the propagator for 1 block of S3
+            reset ; # resets the density matrix to rho0
+            store 3 ; # identity prop
+            acq ; # take first data point i.e. zero
+    
+            # loop below reuses stored propagators for the rest of acq
+            for {{set j 1}} {{$j < $par(np)}} {{incr j}} {{
+            reset
+            prop 3 ; # call the identity propagator for the first time and then calls 1 to j-1 S3's
+            prop 1 ; # call jth S3
+            store 3 ; # store it in 3 and reused later
+            {filter_dq}
+            prop 3 ; # reconversion
+            acq ; # detect 1 point
+            }}
+            }}
+            """
+        st.code(pulse_sequence, language='tcl')
 
-st.subheader('Heteronuclear Recoupling')
-option_heteronuclear_recoupling = ["tedor", "redor"]
-heteronuclear_recoupling = st.selectbox("Heteronuclear Recoupling Sequence:", option_heteronuclear_recoupling, index=None)
-if heteronuclear_recoupling is not None:
-    st.code(generate_heteronuclear_recoupling(heteronuclear_recoupling), language='tcl')
+    st.subheader('Heteronuclear Recoupling')
+    option_heteronuclear_recoupling = ["tedor", "redor"]
+    heteronuclear_recoupling = st.selectbox("Heteronuclear Recoupling Sequence:", option_heteronuclear_recoupling, index=None)
+    if heteronuclear_recoupling is not None:
+        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
+        pulse_sequence = f"""
+                          proc pulseq {{}}  {{
+              maxdt {max_delta_time}
+              {generate_heteronuclear_recoupling(heteronuclear_recoupling)}
+              }}
+              """
+        st.code(pulse_sequence, language='tcl')
 
 
 st.header('Decoupling')
 st.divider()
-st.subheader('Heteronuclear Decoupling')
-option_heteronuclear_decoupling = ["cw", "tppm", "swftppm", "xix", "spinal64", "rcw"]
-heteronuclear_decoupling = st.selectbox("Heteronuclear Decoupling Sequence:", option_heteronuclear_decoupling, index=None)
-if heteronuclear_decoupling is not None:
-    max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
-    pulse_sequence = f"""
-    proc pulseq{{}} {{
-    maxdt {max_delta_time}
-    {generate_decoupling(heteronuclear_decoupling)}
-    }}
-    """
-    st.code(pulse_sequence, language='tcl')
+
+with st.container(border=True):
+    st.subheader('Heteronuclear Decoupling')
+    option_heteronuclear_decoupling = ["cw", "tppm", "swftppm", "xix", "spinal64", "rcw"]
+    heteronuclear_decoupling = st.selectbox("Heteronuclear Decoupling Sequence:", option_heteronuclear_decoupling, index=None)
+    if heteronuclear_decoupling is not None:
+        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
+        pulse_sequence = f"""
+        proc pulseq{{}} {{
+        maxdt {max_delta_time}
+        {generate_decoupling(heteronuclear_decoupling)}
+        }}
+        """
+        st.code(pulse_sequence, language='tcl')
 
 
-st.subheader('Homonuclear Decoupling')
-option_homonuclear_decoupling = ["LG", "FSLG", "wPMLGmmbar", "LG4"]
+    st.subheader('Homonuclear Decoupling')
+    option_homonuclear_decoupling = ["wpmlg", "fslg", "lg4"]
 
-homonuclear_decoupling = st.selectbox("Homonuclear Decoupling Sequence:", option_homonuclear_decoupling, index=None)
-if homonuclear_decoupling is not None:
-    st.code(generate_decoupling(homonuclear_decoupling), language='tcl')
+    homonuclear_decoupling = st.selectbox("Homonuclear Decoupling Sequence:", option_homonuclear_decoupling, index=None)
+    if homonuclear_decoupling is not None:
+        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
+        pulse_sequence = f"""
+        proc pulseq{{}} {{
+        maxdt {max_delta_time}
+        {generate_decoupling(homonuclear_decoupling)}
+        }}
+        """
+        st.code(pulse_sequence, language='tcl')
