@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Add Simpson Pulse Program page with enhanced functionality&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` to generate homonuclear and heteronuclear recoupling TCL sequences via Streamlit based on user inputs. Added support for double quantum filtering and customizable parameters for sequence generation. Updated project configurations, including SDK settings and `.idea` workspace adjustments, to align with the new features.">
+    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.">
+      <change afterPath="$PROJECT_DIR$/simpson_gui/pages/05_Simpson_Full_File.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/simpson_gui.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simpson_gui.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpson_gui/pages/01_Simpson_Spinsys.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/01_Simpson_Spinsys.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpson_gui/pages/02_Simpson_Parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/02_Simpson_Parameters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simpson_gui/pages/03_Simpson_Pulse_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/03_Simpson_Pulse_Program.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpson_gui/pages/04_Simpson_Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/04_Simpson_Main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +71,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "develop",
-    "last_opened_file_path": "E:/github/simpson",
+    "last_opened_file_path": "D:/github/simpson_gui",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,8 +122,8 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (simpson_gui)" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\subhr\PycharmProjects\simpson_gui\simpson_gui" />
+      <option name="SDK_NAME" value="C:\Users\subhr\miniforge3\envs\nmr" />
+      <option name="WORKING_DIRECTORY" value="D:\github\simpson_gui" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -174,23 +182,7 @@
       <option name="project" value="LOCAL" />
       <updated>1736173445437</updated>
     </task>
-    <task id="LOCAL-00003" summary="Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` to generate homonuclear recoupling TCL sequences via Streamlit based on user inputs. Added new functionality for wPMLG decoupling and refined heteronuclear and homonuclear decoupling options. Updated project SDK configuration and workspace settings to align with the new structure and functionality.">
-      <option name="closed" value="true" />
-      <created>1736270476814</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1736270476814</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Add Simpson Pulse Program page with enhanced functionality&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` to generate homonuclear and heteronuclear recoupling TCL sequences via Streamlit based on user inputs. Added support for double quantum filtering and customizable parameters for sequence generation. Updated project configurations, including SDK settings and `.idea` workspace adjustments, to align with the new features.">
-      <option name="closed" value="true" />
-      <created>1736356534417</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1736356534417</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,13 +193,10 @@
     <MESSAGE value="updating powder files" />
     <MESSAGE value="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings." />
     <MESSAGE value="Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` for generating homonuclear recoupling TCL sequences based on user input via Streamlit. Updated project configuration and workspace settings to reflect changes and improve project organization." />
-    <MESSAGE value="Update SDK and enhance project structure&#10;&#10;Updated Python SDK to &quot;Python 3.12 (simpson_gui)&quot; for consistency and improved code paths. Refactored decoupling logic in `03_Simpson_Pulse_Program.py` for clarity and accuracy. Modified `.idea` settings to exclude `.venv` and refined workspace configurations for better repository organization." />
-    <MESSAGE value="Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` to generate homonuclear recoupling TCL sequences via Streamlit based on user inputs. Added new functionality for wPMLG decoupling and refined heteronuclear and homonuclear decoupling options. Updated project SDK configuration and workspace settings to align with the new structure and functionality." />
-    <MESSAGE value="Add Simpson Pulse Program page with enhanced functionality&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` to generate homonuclear and heteronuclear recoupling TCL sequences via Streamlit based on user inputs. Added support for double quantum filtering and customizable parameters for sequence generation. Updated project configurations, including SDK settings and `.idea` workspace adjustments, to align with the new features." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Simpson Pulse Program page with enhanced functionality&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` to generate homonuclear and heteronuclear recoupling TCL sequences via Streamlit based on user inputs. Added support for double quantum filtering and customizable parameters for sequence generation. Updated project configurations, including SDK settings and `.idea` workspace adjustments, to align with the new features." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` for generating homonuclear recoupling TCL sequences based on user input via Streamlit. Updated project configuration and workspace settings to reflect changes and improve project organization." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736428725164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\subhr\PycharmProjects\simpson_gui\simpson_gui" />
+    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736614723274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\github\simpson_gui" />
     <SUITE FILE_PATH="coverage/simpson_gui$03_Simpson_Pulse_Program.coverage" NAME="03_Simpson_Pulse_Program Coverage Results" MODIFIED="1736180637621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simpson_gui/pages" />
   </component>
 </project>

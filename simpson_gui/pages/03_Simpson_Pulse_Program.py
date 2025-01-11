@@ -136,8 +136,8 @@ def generate_decoupling(type) :
     def decoupling_cw() :
         decoupling_code = f"""
         acq_block {{
-            pulse $par(tdec) 0 x $par(rf) 0
-            pulse $par(tdec) 0 x $par(rf) 0
+            pulse $tdec 0 x $rf 0
+            pulse $tdec 0 x $rf 0
         }}
         """
         return decoupling_code
@@ -145,8 +145,8 @@ def generate_decoupling(type) :
     def decoupling_tppm() :
         decoupling_code = f"""
         acq_block {{
-            pulse $par(tdec) 0 x $par(rf) $par(ph)
-            pulse $par(tdec) 0 x $par(rf) -$par(ph)
+            pulse $tdec 0 x $rf $ph
+            pulse $tdec 0 x $rf -$ph
         }}
         """
         return decoupling_code
@@ -155,8 +155,8 @@ def generate_decoupling(type) :
         decoupling_code = f"""
         acq_block {{
             foreach mul [list 0.78 0.86 0.94 0.96 0.98 1 1.02 1.04 1.06 1.14 1.22] {{
-                pulse [expr $mul*$par(tdec)] 0 0 $par(rf) $par(ph)
-                pulse [expr $mul*$par(tdec)] 0 0 $par(rf) -$par(ph)
+                pulse [expr $mul*$tdec] 0 0 $rf $ph
+                pulse [expr $mul*$tdec] 0 0 $rf -$ph
             }}
         }}
         """
@@ -165,8 +165,8 @@ def generate_decoupling(type) :
     def decoupling_xix() :
         decoupling_code = f"""
         acq_block {{
-            pulse [expr $par(tr)*$par(xix)] 0 x $par(rf) x
-            pulse [expr $par(tr)*$par(xix)] 0 x $par(rf) -x
+            pulse [expr $par(tr)*$par(xix)] 0 x $rf x
+            pulse [expr $par(tr)*$par(xix)] 0 x $rf -x
         }}
         """
         return decoupling_code
@@ -175,14 +175,14 @@ def generate_decoupling(type) :
         decoupling_code = f"""
         acq_block {{
             foreach sup [list 1 -1 -1 1 -1 1 1 -1] {{
-                pulse $par(tdec) 0 x $par(rf) [expr $sup*$par(ph)]
-                pulse $par(tdec) 0 x $par(rf) [expr -$sup*$par(ph)]
-                pulse $par(tdec) 0 x $par(rf) [expr $sup*($par(ph)+5)]
-                pulse $par(tdec) 0 x $par(rf) [expr $sup*(-$par(ph)-5)]
-                pulse $par(tdec) 0 x $par(rf) [expr $sup*($par(ph)+10)]
-                pulse $par(tdec) 0 x $par(rf) [expr $sup*(-$par(ph)-10)]
-                pulse $par(tdec) 0 x $par(rf) [expr $sup*($par(ph)+5)]
-                pulse $par(tdec) 0 x $par(rf) [expr $sup*(-$par(ph)-5)]
+                pulse $tdec 0 x $rf [expr $sup*$ph]
+                pulse $tdec 0 x $rf [expr -$sup*$ph]
+                pulse $tdec 0 x $rf [expr $sup*($ph+5)]
+                pulse $tdec 0 x $rf [expr $sup*(-$ph-5)]
+                pulse $tdec 0 x $rf [expr $sup*($ph+10)]
+                pulse $tdec 0 x $rf [expr $sup*(-$ph-10)]
+                pulse $tdec 0 x $rf [expr $sup*($ph+5)]
+                pulse $tdec 0 x $rf [expr $sup*(-$ph-5)]
             }}
         }}
         """
@@ -191,13 +191,13 @@ def generate_decoupling(type) :
     def decoupling_rcw() :
         decoupling_code = f"""
         acq_block {{
-            pulse [expr $par(tr)-0.5*$par(t180)] 0 0 $par(rf) 0
-            pulse $par(t180) 0 0 $par(rf) 90
-            pulse [expr $par(tr)-$par(t180)] 0 0 $par(rf) 0
-            pulse $par(t180) 0 0 $par(rf) 0
-            pulse [expr $par(tr)-$par(t180)] 0 0 $par(rf) 0
-            pulse $par(t180) 0 0 $par(rf) 90
-            pulse [expr $par(tr)-0.5*$par(t180)] 0 0 $par(rf) 0
+            pulse [expr $par(tr)-0.5*$tdec] 0 0 $rf 0
+            pulse $tdec 0 0 $rf 90
+            pulse [expr $par(tr)-$tdec] 0 0 $rf 0
+            pulse $tdec 0 0 $rf 0
+            pulse [expr $par(tr)-$tdec] 0 0 $rf 0
+            pulse $tdec 0 0 $rf 90
+            pulse [expr $par(tr)-0.5*$tdec] 0 0 $rf 0
         }}
         """
         return decoupling_code
@@ -353,7 +353,7 @@ def generate_heteronuclear_recoupling(type) :
             
             
             pulseid 1 250000 x 250000 x
-            pulseid 1 250000 x 250000 $par(ph)
+            pulseid 1 250000 x 250000 $ph
             filter 10
             
             prop 1 $s
@@ -411,89 +411,103 @@ def generate_heteronuclear_recoupling(type) :
     else :
         raise ValueError ( f"Unknown decoupling type: {type}" )
 
-st.header('Recoupling')
-st.divider()
-with st.container(border=True):
+def main():
+    st.header('Recoupling')
+    st.divider()
+    with st.container(border=True):
 
-    st.subheader('Homonuclear Recoupling')
-    option_homonuclear_recoupling = ["s3", "brs3", "sr26", "postc7", "rseq", "baba"]
-    homonuclear_recoupling = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
-    if homonuclear_recoupling is not None:
-        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
-        dq_filter_choice = st.toggle("Double Quantum Filter")
-        if dq_filter_choice:
-            dq_filter = "matrix set 2 totalcoherence {2 -2} "
-            filter_dq = "filter 2"
-        else:
-            dq_filter = " "
-            filter_dq = " "
-        pulse_sequence = f"""
-                        proc pulseq {{}}  {{
+        st.subheader('Homonuclear Recoupling')
+        option_homonuclear_recoupling = ["s3", "brs3", "sr26", "postc7", "rseq", "baba"]
+        homonuclear_recoupling = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
+        if homonuclear_recoupling is not None:
+            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
+            dq_filter_choice = st.toggle("Double Quantum Filter")
+            if dq_filter_choice:
+                dq_filter = "matrix set 2 totalcoherence {2 -2} "
+                filter_dq = "filter 2"
+            else:
+                dq_filter = " "
+                filter_dq = " "
+            pulse_sequence = f"""
+                            proc pulseq {{}}  {{
+                maxdt {max_delta_time}
+                {dq_filter}
+                
+                {generate_recoupling(homonuclear_recoupling)}
+                store 1 ; #stores the propagator for 1 block of S3
+                reset ; # resets the density matrix to rho0
+                store 3 ; # identity prop
+                acq ; # take first data point i.e. zero
+        
+                # loop below reuses stored propagators for the rest of acq
+                for {{set j 1}} {{$j < $par(np)}} {{incr j}} {{
+                reset
+                prop 3 ; # call the identity propagator for the first time and then calls 1 to j-1 S3's
+                prop 1 ; # call jth S3
+                store 3 ; # store it in 3 and reused later
+                {filter_dq}
+                prop 3 ; # reconversion
+                acq ; # detect 1 point
+                }}
+                }}
+                """
+            st.code(pulse_sequence, language='tcl')
+
+        st.subheader('Heteronuclear Recoupling')
+        option_heteronuclear_recoupling = ["tedor", "redor"]
+        heteronuclear_recoupling = st.selectbox("Heteronuclear Recoupling Sequence:", option_heteronuclear_recoupling, index=None)
+        if heteronuclear_recoupling is not None:
+            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
+            pulse_sequence = f"""
+                              proc pulseq {{}}  {{
+                  maxdt {max_delta_time}
+                  {generate_heteronuclear_recoupling(heteronuclear_recoupling)}
+                  }}
+                  """
+            st.code(pulse_sequence, language='tcl')
+
+
+    st.header('Decoupling')
+    st.divider()
+
+    with st.container(border=True):
+        st.subheader('Heteronuclear Decoupling')
+        option_heteronuclear_decoupling = ["cw", "tppm", "swftppm", "xix", "spinal64", "rcw"]
+        heteronuclear_decoupling = st.selectbox("Heteronuclear Decoupling Sequence:", option_heteronuclear_decoupling, index=None)
+        if heteronuclear_decoupling is not None:
+            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
+            pulse_sequence = f"""
+            proc pulseq {{}} {{
+            set rf 100000
+            set tdec [expr 0.5e6/$rf]
+            set ph 15
             maxdt {max_delta_time}
-            {dq_filter}
-            
-            {generate_recoupling(homonuclear_recoupling)}
-            store 1 ; #stores the propagator for 1 block of S3
-            reset ; # resets the density matrix to rho0
-            store 3 ; # identity prop
-            acq ; # take first data point i.e. zero
-    
-            # loop below reuses stored propagators for the rest of acq
-            for {{set j 1}} {{$j < $par(np)}} {{incr j}} {{
-            reset
-            prop 3 ; # call the identity propagator for the first time and then calls 1 to j-1 S3's
-            prop 1 ; # call jth S3
-            store 3 ; # store it in 3 and reused later
-            {filter_dq}
-            prop 3 ; # reconversion
-            acq ; # detect 1 point
-            }}
+            {generate_decoupling(heteronuclear_decoupling)}
             }}
             """
-        st.code(pulse_sequence, language='tcl')
-
-    st.subheader('Heteronuclear Recoupling')
-    option_heteronuclear_recoupling = ["tedor", "redor"]
-    heteronuclear_recoupling = st.selectbox("Heteronuclear Recoupling Sequence:", option_heteronuclear_recoupling, index=None)
-    if heteronuclear_recoupling is not None:
-        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
-        pulse_sequence = f"""
-                          proc pulseq {{}}  {{
-              maxdt {max_delta_time}
-              {generate_heteronuclear_recoupling(heteronuclear_recoupling)}
-              }}
-              """
-        st.code(pulse_sequence, language='tcl')
+            st.code(pulse_sequence, language='tcl')
 
 
-st.header('Decoupling')
-st.divider()
+        st.subheader('Homonuclear Decoupling')
+        option_homonuclear_decoupling = ["wpmlg", "fslg", "lg4"]
 
-with st.container(border=True):
-    st.subheader('Heteronuclear Decoupling')
-    option_heteronuclear_decoupling = ["cw", "tppm", "swftppm", "xix", "spinal64", "rcw"]
-    heteronuclear_decoupling = st.selectbox("Heteronuclear Decoupling Sequence:", option_heteronuclear_decoupling, index=None)
-    if heteronuclear_decoupling is not None:
-        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
-        pulse_sequence = f"""
-        proc pulseq{{}} {{
-        maxdt {max_delta_time}
-        {generate_decoupling(heteronuclear_decoupling)}
-        }}
-        """
-        st.code(pulse_sequence, language='tcl')
+        homonuclear_decoupling = st.selectbox("Homonuclear Decoupling Sequence:", option_homonuclear_decoupling, index=None)
+        if homonuclear_decoupling is not None:
+            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
+            pulse_sequence = f"""
+            proc pulseq{{}} {{
+            maxdt {max_delta_time}
+            {generate_decoupling(homonuclear_decoupling)}
+            }}
+            """
+            st.code(pulse_sequence, language='tcl')
 
+if __name__ == '__main__':
+    st.title("To generate pulse program")
+    st.divider()
 
-    st.subheader('Homonuclear Decoupling')
-    option_homonuclear_decoupling = ["wpmlg", "fslg", "lg4"]
+    main ()
+    pulse_sequence = st.text_area("Paste the pulse sequence here:", value=None)
 
-    homonuclear_decoupling = st.selectbox("Homonuclear Decoupling Sequence:", option_homonuclear_decoupling, index=None)
-    if homonuclear_decoupling is not None:
-        max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
-        pulse_sequence = f"""
-        proc pulseq{{}} {{
-        maxdt {max_delta_time}
-        {generate_decoupling(homonuclear_decoupling)}
-        }}
-        """
-        st.code(pulse_sequence, language='tcl')
+    if st.button("Add sequence to full code"):
+        st.session_state['pulse_sequence'] = pulse_sequence
