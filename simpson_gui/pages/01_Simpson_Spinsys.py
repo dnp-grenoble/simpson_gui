@@ -341,8 +341,12 @@ def main():
         st.code(spinsys_code, language='tcl')
 
 
-
 if __name__ == '__main__':
     st.title("To generate spinsys section of SIMPSON")
     st.divider()
     main()
+
+    spinsys = st.text_area("Paste the spinsys here:", value=None)
+
+    if st.button("Add sequence to full code"):
+        st.session_state['simpson_spinsys'] = spinsys

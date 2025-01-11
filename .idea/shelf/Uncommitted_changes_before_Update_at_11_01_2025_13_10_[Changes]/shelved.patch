@@ -1,0 +1,228 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44_[Changes]/shelved.patch	(revision 3fbe1c6802660294462a917f9e0cdc36b6b2b17f)
++++ /dev/null	(revision 3fbe1c6802660294462a917f9e0cdc36b6b2b17f)
+@@ -1,66 +0,0 @@
+-Index: simpson_gui/simpson_parameters.py
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>#%% Header files\r\nimport numpy as np\r\nimport streamlit as st\r\n\r\nwith st.container () :\r\n    option_of_field = st.selectbox ( \"Field in MHz (1H) or T\" ,\r\n                                     (\"MHz\" , \"Tesla\") ,\r\n                                     )\r\n    if option_of_field == \"MHz\" :\r\n        field = st.number_input ( \"Enter the field in MHz\" )\r\n    else :\r\n        field = st.number_input ( \"Enter the field in T\" )\r\n\r\n    spinning_frequency = st.number_input ( \"Spinning Frequency in Hz\" , min_value=1 , max_value=500000 , value=10000 )\r\n\r\n    options_crystal_file = [ \"LEBoct31\" , \"alpha0beta0\" , \"alpha0beta90\" , \"bcr10\" ,\r\n                             \"bcr100\" , \"bcr20\" , \"bcr200\" , \"bcr30\" , \"bcr40\" , \"bcr400\" ,\r\n                             \"bcr50\" , \"bcr80\" , \"rep10\" , \"rep100\" , \"rep144\" , \"rep168\" ,\r\n                             \"rep20\" , \"rep2000\" , \"rep256\" , \"rep30\" , \"rep320\" , \"rep66\" ,\r\n                             \"rep678\" , \"repoct41\" , \"zcw143\" , \"zcw20\" , \"zcw232\" , \"zcw33\" ,\r\n                             \"zcw376\" , \"zcw4180\" , \"zcw54\" , \"zcw615\" , \"zcw88\" , \"zcw986\" ,\r\n                             \"zcw28656\" ]\r\n    powder_file = st.selectbox ( \"Which powder averaging scheme?\" , options_crystal_file ,\r\n                                 )\r\n\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/simpson_gui/simpson_parameters.py b/simpson_gui/simpson_parameters.py
+---- a/simpson_gui/simpson_parameters.py	(revision 20962c11ebc2e72d40cec13485331ac17845ea0b)
+-+++ b/simpson_gui/simpson_parameters.py	(date 1735857234407)
+-@@ -23,3 +23,4 @@
+-     powder_file = st.selectbox ( "Which powder averaging scheme?" , options_crystal_file ,
+-                                  )
+- 
+-+    number_of_gamma_angles = st.number_input("Number of gamma angles", format='%d')
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"2a8f393b-18af-4d01-aa7e-ee0c228dcf7b\" name=\"Changes\" comment=\"first commit\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"QODANA_PROBLEMS_VIEW_TAB\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2qck6vlFy09utu5kqlxthZQo2w5\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Python.genrep.executor\": \"Run\",\r\n    \"Python.simpson_gui.executor\": \"Run\",\r\n    \"Python.streamlit.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"last_opened_file_path\": \"D:/github/simpson_gui/simpson_gui/simpson_parameters.py\",\r\n    \"settings.editor.selected.configurable\": \"preferences.lookFeel\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\github\\simpson_gui\\simpson_gui\\resources\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\github\\simpson_gui\\simpson_gui\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.genrep\">\r\n    <configuration name=\"genrep\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"simpson_gui\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/simpson_gui\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/simpson_gui/genrep.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"streamlit\" type=\"PythonConfigurationType\" factoryName=\"Python\">\r\n      <module name=\"simpson_gui\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"-m streamlit run\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"SDK_NAME\" value=\"C:\\Users\\subhr\\miniforge3\\envs\\nmr\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"D:\\github\\simpson_gui\\simpson_gui\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/simpson_gui/simpson_parameters.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Python.streamlit\" />\r\n      <item itemvalue=\"Python.genrep\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.genrep\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"2a8f393b-18af-4d01-aa7e-ee0c228dcf7b\" name=\"Changes\" comment=\"\" />\r\n      <created>1734969079504</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1734969079504</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"first commit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1735856633825</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1735856633825</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"first commit\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"first commit\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 20962c11ebc2e72d40cec13485331ac17845ea0b)
+-+++ b/.idea/workspace.xml	(date 1735929892157)
+-@@ -4,7 +4,10 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="first commit" />
+-+    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="first commit">
+-+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/simpson_gui/simpson_parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/simpson_parameters.py" afterDir="false" />
+-+    </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-@@ -20,6 +23,18 @@
+-   <component name="Git.Settings">
+-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-   </component>
+-+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+-+  "lastFilter": {
+-+    "state": "OPEN",
+-+    "assignee": "subhradip-paul"
+-+  }
+-+}]]></component>
+-+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-+  "selectedUrlAndAccountId": {
+-+    "url": "https://github.com/dnp-grenoble/simpson_gui.git",
+-+    "accountId": "0401cf25-aa36-4331-91cd-da04f21af55c"
+-+  }
+-+}]]></component>
+-   <component name="ProblemsViewState">
+-     <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+-   </component>
+-@@ -54,7 +69,7 @@
+-       <recent name="D:\github\simpson_gui\simpson_gui" />
+-     </key>
+-   </component>
+--  <component name="RunManager" selected="Python.genrep">
+-+  <component name="RunManager" selected="Python.streamlit">
+-     <configuration name="genrep" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+-       <module name="simpson_gui" />
+-       <option name="ENV_FILES" value="" />
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44__Changes_.xml	(revision 3fbe1c6802660294462a917f9e0cdc36b6b2b17f)
++++ /dev/null	(revision 3fbe1c6802660294462a917f9e0cdc36b6b2b17f)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_03_01_2025_19_44_[Changes]" date="1735929933771" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2025_19_44_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 03/01/2025 19:44 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Black\">\r\n    <option name=\"sdkName\" value=\"C:\\Users\\subhr\\miniforge3\\envs\\nmr\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"Python 3.12 (simpson_gui)\" project-jdk-type=\"Python SDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 3fbe1c6802660294462a917f9e0cdc36b6b2b17f)
++++ b/.idea/misc.xml	(date 1736282357183)
+@@ -3,5 +3,5 @@
+   <component name="Black">
+     <option name="sdkName" value="C:\Users\subhr\miniforge3\envs\nmr" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (simpson_gui)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="C:\Users\subhr\miniforge3\envs\nmr" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"2a8f393b-18af-4d01-aa7e-ee0c228dcf7b\" name=\"Changes\" comment=\"Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/simpson_gui.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/simpson_gui.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/simpson_gui/pages/03_Simpson_Pulse_Program.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/simpson_gui/pages/03_Simpson_Pulse_Program.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;subhradip-paul&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/dnp-grenoble/simpson_gui.git&quot;,\r\n    &quot;accountId&quot;: &quot;62b6dbae-def6-42e9-91ec-ca2e7d9673f6&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"QODANA_PROBLEMS_VIEW_TAB\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2qck6vlFy09utu5kqlxthZQo2w5\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Python.03_Simpson_Pulse_Program.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.genrep.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.simpson_gui.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.streamlit.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/subhr/PycharmProjects/simpson_gui/simpson_gui&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\github\\simpson_gui\\simpson_gui\\resources\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\github\\simpson_gui\\simpson_gui\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.streamlit\">\r\n    <configuration name=\"genrep\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"simpson_gui\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/simpson_gui\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/simpson_gui/genrep.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"streamlit\" type=\"PythonConfigurationType\" factoryName=\"Python\">\r\n      <module name=\"simpson_gui\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"-m streamlit run\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"SDK_NAME\" value=\"Python 3.12 (simpson_gui)\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"C:\\Users\\subhr\\PycharmProjects\\simpson_gui\\simpson_gui\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/simpson_gui/Homepage.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Python.streamlit\" />\r\n      <item itemvalue=\"Python.genrep\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.genrep\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PY-243.22562.220\" />\r\n        <option value=\"bundled-python-sdk-0fc6c617c4bd-9a18a617cbe4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.22562.220\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"2a8f393b-18af-4d01-aa7e-ee0c228dcf7b\" name=\"Changes\" comment=\"\" />\r\n      <created>1734969079504</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1734969079504</updated>\r\n      <workItem from=\"1735911143631\" duration=\"4916000\" />\r\n      <workItem from=\"1735922959346\" duration=\"2123000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"first commit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1735856633825</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1735856633825</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1736173445437</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1736173445437</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"first commit\" />\r\n    <MESSAGE value=\"updating powder files\" />\r\n    <MESSAGE value=\"Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.\" />\r\n    <MESSAGE value=\"Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` for generating homonuclear recoupling TCL sequences based on user input via Streamlit. Updated project configuration and workspace settings to reflect changes and improve project organization.\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` for generating homonuclear recoupling TCL sequences based on user input via Streamlit. Updated project configuration and workspace settings to reflect changes and improve project organization.\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/simpson_gui$streamlit.coverage\" NAME=\"streamlit Coverage Results\" MODIFIED=\"1736181849205\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"C:\\Users\\subhr\\PycharmProjects\\simpson_gui\\simpson_gui\" />\r\n    <SUITE FILE_PATH=\"coverage/simpson_gui$03_Simpson_Pulse_Program.coverage\" NAME=\"03_Simpson_Pulse_Program Coverage Results\" MODIFIED=\"1736180637621\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/simpson_gui/pages\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 3fbe1c6802660294462a917f9e0cdc36b6b2b17f)
++++ b/.idea/workspace.xml	(date 1736597399075)
+@@ -4,11 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.">
++    <list default="true" id="2a8f393b-18af-4d01-aa7e-ee0c228dcf7b" name="Changes" comment="Refactor decoupling and recoupling logic in pulse program&#10;&#10;Redesigned the decoupling and recoupling generation functions for better modularity and readability. Added additional decoupling and heteronuclear recoupling sequence options, alongside dynamic sequence generation for user selections in the Streamlit interface.">
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/simpson_gui.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simpson_gui.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/simpson_gui/pages/03_Simpson_Pulse_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpson_gui/pages/03_Simpson_Pulse_Program.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -38,8 +37,8 @@
+ }</component>
+   <component name="GithubPullRequestsUISettings">{
+   &quot;selectedUrlAndAccountId&quot;: {
+-    &quot;url&quot;: &quot;https://github.com/dnp-grenoble/simpson_gui.git&quot;,
+-    &quot;accountId&quot;: &quot;62b6dbae-def6-42e9-91ec-ca2e7d9673f6&quot;
++    &quot;url&quot;: &quot;git@github.com:dnp-grenoble/simpson_gui.git&quot;,
++    &quot;accountId&quot;: &quot;0401cf25-aa36-4331-91cd-da04f21af55c&quot;
+   }
+ }</component>
+   <component name="ProblemsViewState">
+@@ -58,14 +57,13 @@
+   </component>
+   <component name="PropertiesComponent">{
+   &quot;keyToString&quot;: {
+-    &quot;Python.03_Simpson_Pulse_Program.executor&quot;: &quot;Run&quot;,
+     &quot;Python.genrep.executor&quot;: &quot;Run&quot;,
+     &quot;Python.simpson_gui.executor&quot;: &quot;Run&quot;,
+     &quot;Python.streamlit.executor&quot;: &quot;Run&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/subhr/PycharmProjects/simpson_gui/simpson_gui&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/subhr/PycharmProjects/simpson&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+@@ -116,8 +114,8 @@
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="SDK_NAME" value="Python 3.12 (simpson_gui)" />
+-      <option name="WORKING_DIRECTORY" value="C:\Users\subhr\PycharmProjects\simpson_gui\simpson_gui" />
++      <option name="SDK_NAME" value="C:\Users\subhr\miniforge3\envs\nmr" />
++      <option name="WORKING_DIRECTORY" value="C:\Users\subhr\PycharmProjects\simpson" />
+       <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+@@ -132,8 +130,8 @@
+       <method v="2" />
+     </configuration>
+     <list>
+-      <item itemvalue="Python.streamlit" />
+       <item itemvalue="Python.genrep" />
++      <item itemvalue="Python.streamlit" />
+     </list>
+     <recent_temporary>
+       <list>
+@@ -168,15 +166,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1735856633825</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings.">
+-      <option name="closed" value="true" />
+-      <created>1736173445437</created>
+-      <option name="number" value="00002" />
+-      <option name="presentableId" value="LOCAL-00002" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1736173445437</updated>
+-    </task>
+-    <option name="localTasksCounter" value="3" />
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -184,13 +174,10 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="first commit" />
+-    <MESSAGE value="updating powder files" />
+-    <MESSAGE value="Update project SDK and improve repository structure&#10;&#10;Updated Python SDK paths to &quot;Python 3.12 (simpson_gui)&quot; for consistency. Added a `.gitignore` file to exclude the virtual environment directory. Enhanced README formatting and refined the `.idea` configuration by excluding `.venv` and revising workspace settings." />
+-    <MESSAGE value="Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` for generating homonuclear recoupling TCL sequences based on user input via Streamlit. Updated project configuration and workspace settings to reflect changes and improve project organization." />
+-    <option name="LAST_COMMIT_MESSAGE" value="Add Simpson Pulse Program page for homonuclear recoupling&#10;&#10;Introduced `03_Simpson_Pulse_Program.py` for generating homonuclear recoupling TCL sequences based on user input via Streamlit. Updated project configuration and workspace settings to reflect changes and improve project organization." />
++    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736181849205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\subhr\PycharmProjects\simpson_gui\simpson_gui" />
+-    <SUITE FILE_PATH="coverage/simpson_gui$03_Simpson_Pulse_Program.coverage" NAME="03_Simpson_Pulse_Program Coverage Results" MODIFIED="1736180637621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simpson_gui/pages" />
++    <SUITE FILE_PATH="coverage/simpson_gui$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1736192745076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\subhr\PycharmProjects\simpson" />
++    <SUITE FILE_PATH="coverage/simpson_gui$ZCW_sequence_generator.coverage" NAME="ZCW_sequence_generator Coverage Results" MODIFIED="1735988721560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simpson_gui" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/simpson_gui.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"PYTHON_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <excludeFolder url=\"file://$MODULE_DIR$/.venv\" />\r\n    </content>\r\n    <orderEntry type=\"jdk\" jdkName=\"Python 3.12 (simpson_gui)\" jdkType=\"Python SDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n  <component name=\"PackageRequirementsSettings\">\r\n    <option name=\"removeUnused\" value=\"true\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/simpson_gui.iml b/.idea/simpson_gui.iml
+--- a/.idea/simpson_gui.iml	(revision 3fbe1c6802660294462a917f9e0cdc36b6b2b17f)
++++ b/.idea/simpson_gui.iml	(date 1736282357181)
+@@ -4,7 +4,7 @@
+     <content url="file://$MODULE_DIR$">
+       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+     </content>
+-    <orderEntry type="jdk" jdkName="Python 3.12 (simpson_gui)" jdkType="Python SDK" />
++    <orderEntry type="jdk" jdkName="C:\Users\subhr\miniforge3\envs\nmr" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+   <component name="PackageRequirementsSettings">

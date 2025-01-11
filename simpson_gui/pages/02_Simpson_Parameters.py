@@ -199,7 +199,7 @@ def main () :
                              "zcw376" , "zcw4180" , "zcw54" , "zcw615" , "zcw88" , "zcw986" ,
                              "zcw28656" ]
     powder_file = st.selectbox ( "Which powder averaging scheme?" , options_crystal_file ,
-                                 index=None )
+                                 index=27 )
     if powder_file is not None :
         match = re.split ( r"([A-Za-z]+)([0-9]+)" , powder_file )
         if match[ 1 ] == 'bcr' :
@@ -247,10 +247,10 @@ def main () :
 
     sw = st.text_input("Spectral window", value="spin_rate")
 
-    conjugate_fid = st.checkbox("Conjugate FID?", value=False)
+    conjugate_fid = "auto"
 
     value_methods = ["direct", "freq", "gcompute", "dysev", "dysevr", "pade", "taylor", "cheby1", "cheby2"]
-    method_of_sim = st.pills("Method of propagation", value_methods, selection_mode="multi")
+    method_of_sim = st.pills("Method of propagation", value_methods, selection_mode="multi", default=value_methods[0])
 
     gen_str_method = ""
     for methods in method_of_sim:
@@ -265,24 +265,29 @@ def main () :
                                                               "Tošner, Z. ‘Computer-Intensive Simulation of Solid-State NMR Experiments Using SIMPSON’. JMR 246 (2014): 79–93. https://doi.org/10.1016/j.jmr.2014.07.002."
              )
 
-    par_code = (" par {  \n \t proton_frequency \t" + f"{float ( field ) * (10.0 ** 6):.4e} \n"
-                "\t spinning_rate \t" + f"{spinning_frequency} \n"
-                "\t crystal_file \t" + f"{powder_file} \n"
-                "\t gamma_angles \t" + f"{gamma_angles} \n"
-                "\t start_operator \t" + f"{start_operator} \n"
-                "\t detect_operator \t" + f"{detect_operator} \n"
-                "\t verbose \t" + f"{verbose} \n"
-                "\t np \t" + f"{number_of_acq_points} \n"
-                "\t sw \t" + f"{sw} \n"
-                "\t conjugate_fid \t" + f"{conjugate_fid} \n"
-                "\t method \t" + f"{gen_str_method} \n"
-                "}"
-                )
+
     st.divider()
     if st.button("Generate code"):
+        par_code = (" par {  \n \t proton_frequency \t" + f"{float ( field ) * (10.0 ** 6):.4e} \n"
+                            "\t spin_rate \t" + f"{spinning_frequency} \n"
+                              "\t crystal_file \t" + f"{powder_file} \n"
+                                 "\t gamma_angles \t" + f"{gamma_angles} \n"
+                                                        "\t start_operator \t" + f"{start_operator} \n"
+                                                                                 "\t detect_operator \t" + f"{detect_operator} \n"
+                                                                                                           "\t verbose \t" + f"{verbose} \n"
+                                                                                                                             "\t np \t" + f"{number_of_acq_points} \n"
+                                                                                                                                          "\t sw \t" + f"{sw} \n"
+                                                                                                                                                       "\t conjugate_fid \t" + f"{conjugate_fid} \n"
+                                                                                                                                                                               "\t method \t" + f"{gen_str_method} \n"
+                                                                                                                                                                                                "}"
+                    )
         st.code(par_code, language="Tcl")
 
 if __name__ == '__main__':
     st.title("To generate par section of SIMPSON")
     st.divider()
     main()
+
+    par_code = st.text_area ( "Paste the parameters here:" , value=None )
+    if st.button("Add parameter section to SIMPSON file"):
+        st.session_state['par_code'] = par_code
