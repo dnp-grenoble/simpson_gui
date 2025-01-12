@@ -16,10 +16,9 @@ def plot_data() :
         x = data[ : , 0 ]
         re = data[ : , 1 ]
         im = data[ : , 2 ]
-        if plot_options is not None :
-            # Determine how many rows we need based on selection
-            cols = len(plot_options)
 
+        cols = len(plot_options)
+        if cols:
             # Create subplots dynamically based on rows
             fig = make_subplots (
                 rows=1 , cols=cols , shared_xaxes=True ,
