@@ -1,18 +1,15 @@
 import streamlit as st
 import os
 
+st.title("SIMPSON GUI")
+st.divider()
 script_dir = os.path.dirname ( __file__ )
 gre_image_file = os.path.join ( script_dir , 'resources/dnp_grenoble_logo.png' )
 python_image_file = os.path.join ( script_dir , 'resources/python.png' )
 st_image_file = os.path.join ( script_dir , 'resources/streamlit.png' )
 
-col1, col2, col3 = st.columns(3,vertical_alignment="bottom", gap="medium")
-with col1:
-    st.image(gre_image_file, use_container_width=True)
-with col2:
-    st.image(python_image_file, use_container_width=True)
-with col3:
-    st.image(st_image_file, use_container_width=True)
+
+
 
 
 st.markdown('''**Welcome to the SIMPSON GUI**  
@@ -37,8 +34,18 @@ Please note that the generated simulation files serve as guides. You are encoura
 4. Vosegaard, Thomas, Anders Malmendal, and Niels C Nielsen. ‘The Flexibility of SIMPSON and SIMMOL for Numerical Simulations in Solid-and Liquid-State NMR Spectroscopy’. Monatshefte f?R Chemie / Chemical Monthly 133, no. 12 (1 December 2002): 1555–74. https://doi.org/10.1007/s00706-002-0519-2.
 
 ### Upcoming Features:
-The pulse sequence and main section will be added soon.
+More pulse sequences will be added in the future.
+
+
 ### Additional Resources:
 You can explore more SIMPSON-related files in our GitHub repository:
 [SIMPSON GitHub Repository](https://github.com/dnp-grenoble/simpson)
 ''')
+
+col1, col2, col3 = st.columns(3,vertical_alignment="center", gap="large")
+with col1:
+    st.image(gre_image_file, use_container_width=True)
+with col2:
+    st.image(python_image_file, use_container_width=True)
+with col3:
+    st.image(st_image_file, use_container_width=True)
