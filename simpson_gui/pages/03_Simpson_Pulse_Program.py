@@ -420,7 +420,7 @@ def main():
         option_homonuclear_recoupling = ["s3", "brs3", "sr26", "postc7", "rseq", "baba"]
         homonuclear_recoupling = st.selectbox("Homonuclear Recoupling Sequence:", option_homonuclear_recoupling, index=None)
         if homonuclear_recoupling is not None:
-            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
+            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 3.0)
             dq_filter_choice = st.toggle("Double Quantum Filter")
             if dq_filter_choice:
                 dq_filter = "matrix set 2 totalcoherence {2 -2} "
@@ -458,7 +458,7 @@ def main():
         option_heteronuclear_recoupling = ["tedor", "redor"]
         heteronuclear_recoupling = st.selectbox("Heteronuclear Recoupling Sequence:", option_heteronuclear_recoupling, index=None)
         if heteronuclear_recoupling is not None:
-            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
+            max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 3.0)
             pulse_sequence = f"""
                               proc pulseq {{}}  {{
                               global par
