@@ -430,6 +430,7 @@ def main():
                 filter_dq = " "
             pulse_sequence = f"""
                             proc pulseq {{}}  {{
+                            global par
                 maxdt {max_delta_time}
                 {dq_filter}
                 
@@ -460,6 +461,7 @@ def main():
             max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value = 1.0)
             pulse_sequence = f"""
                               proc pulseq {{}}  {{
+                              global par
                   maxdt {max_delta_time}
                   {generate_heteronuclear_recoupling(heteronuclear_recoupling)}
                   }}
@@ -478,6 +480,7 @@ def main():
             max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
             pulse_sequence = f"""
             proc pulseq {{}} {{
+            global par
             set rf 100000
             set tdec [expr 0.5e6/$rf]
             set ph 15
@@ -496,6 +499,7 @@ def main():
             max_delta_time = st.number_input('Time over which Hamiltonian is time independent', format='%.1f', value=1.0)
             pulse_sequence = f"""
             proc pulseq{{}} {{
+            global par
             maxdt {max_delta_time}
             {generate_decoupling(homonuclear_decoupling)}
             }}
