@@ -247,7 +247,7 @@ def main () :
 
     sw = st.text_input("Spectral window", value="spin_rate")
 
-    conjugate_fid = "auto"
+    conjugate_fid = st.selectbox("True or False?", ["false", "true"], index=0)
 
     value_methods = ["direct", "freq", "gcompute", "dysev", "dysevr", "pade", "taylor", "cheby1", "cheby2"]
     method_of_sim = st.pills("Method of propagation", value_methods, selection_mode="multi", default=value_methods[0])
